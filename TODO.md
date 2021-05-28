@@ -1,0 +1,5 @@
+- change image sizes - set default
+- map integration - look into mapbox - ruby on rails 
+- add more attributes 
+- add styling
+- deploy to website?

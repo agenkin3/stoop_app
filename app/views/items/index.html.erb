@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1> Items </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      Location (Intersection): <%= item.location %> <br>
+      Description: <%= item.description %> <br> 
+      Posted: <%= item.created_at %>
+       <br>
+        <%= link_to 'Show', item %> <br>
+        <%= link_to 'Edit', edit_item_path(item) %> <br>
+        <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure you want to delete this item?' } %> <br> <br>
+      
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item', new_item_path %>

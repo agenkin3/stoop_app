@@ -8,12 +8,16 @@ class ItemsController < ApplicationController
 
   # GET /items/1 or /items/1.json
   def show
-
+     if @item.image.attached?
+      #image src="<%=(image_tag(@item.image)) %>"
+       end 
   end
 
   # GET /items/new
   def new
     @item = Item.new
+    #@item.photo.attach(io:File.open'app/assets/image/placeholder.png'),
+    #filename 'placeholder.png', content_type: 'image/png'
   end
 
   # GET /items/1/edit
@@ -23,8 +27,9 @@ class ItemsController < ApplicationController
   # POST /items or /items.json
   def create
     @item = Item.new(item_params)
-
+    @item.image.attach(item_params[:image])
     respond_to do |format|
+      
       if @item.save
         format.html { redirect_to @item, notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
@@ -37,6 +42,9 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1 or /items/1.json
   def update
+    @item.image.purge
+    @item.image.attach(item_params[:image])
+    
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: "Item was successfully updated." }
@@ -46,6 +54,7 @@ class ItemsController < ApplicationController
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
+    #@item.photo.attach(params[:avatar])
   end
 
   # DELETE /items/1 or /items/1.json
@@ -65,6 +74,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:location, :description)
+      params.require(:item).permit(:location, :description, :image)
     end
 end

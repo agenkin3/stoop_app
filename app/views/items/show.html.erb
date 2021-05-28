@@ -1,7 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 Description: <%= @item.description %> <br>
-Location: <%= @item.location %> <br>
+Location(Intersection): <%= @item.location %> <br>
+
+  <% if @item.image.attached? %>
+    
+      <strong>Image:</strong>
+      <br>
+      <%= image_tag @item.image %>
+  
+  <% end %>
+
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>
